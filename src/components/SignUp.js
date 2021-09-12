@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Loader from "react-loader-spinner";
 
 import UserContext from '../contexts/UserContext';
 
@@ -49,7 +50,9 @@ export default function SignUp() {
                 <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder="password"></input>
                 <input onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder="nome"></input>
                 <input onChange={(e) => setImage(e.target.value)} value={image} type="text" placeholder="foto"></input>
-                <button isloading={isLoading.toString()} type="submit">Cadastrar</button>
+                <button type="submit">
+                    {isLoading ? <Loader type="ThreeDots" color="#FFFFFF" timeout={3000} /> : 'Cadastrar'}
+                </button>
                 <Link to='/'><SignInLink>Já tem uma conta? Faça login!</SignInLink></Link>
             </Form>
         </LogInBox>
@@ -90,6 +93,9 @@ const Form = styled.form`
         line-height: 25px;
     }
     button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 45px;
         border-radius: 5px;

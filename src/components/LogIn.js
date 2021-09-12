@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Loader from "react-loader-spinner";
 
 import UserContext from '../contexts/UserContext';
 
@@ -12,7 +13,7 @@ export default function LogIn() {
     const history = useHistory();
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {if(user) history.push('/habits')},[]);
+    useEffect(() => {if(user) history.push('/habits')},[user]);
 
     function login(e) {
         e.preventDefault();
@@ -24,7 +25,11 @@ export default function LogIn() {
             request.then((res) => {
                 setIsLoading(false);
                 localStorage.setItem('user',JSON.stringify({
-                    user: res.data.name,
+                    id: res.data.id,
+                    name: res.data.name,
+                    image: res.data.image,
+                    email: res.data.email,
+                    password: res.data.password,
                     token: res.data.token
                 }));
                 setUser(JSON.parse(localStorage.getItem('user')));
@@ -32,9 +37,10 @@ export default function LogIn() {
             });
             request.catch((error) => {
                 setIsLoading(false);
-                alert('Algo deu errado, por favor recarregue a página e tente novamente!');
+                if(error.response.status === 401) {alert('Usuário não cadastrado! Por favor, cadastre-se primeiro.')}
+                else {alert('Algo deu errado, por favor recarregue a página e tente novamente!')}
             })
-        } else { alert('Por favor, verifique seu e-mail e sua senha e tente novamente!') }
+        } else { alert('Por favor, informe seu email e sua senha!') }
     }
 
     return(
@@ -43,7 +49,9 @@ export default function LogIn() {
             <Form onSubmit={login}>
                 <input onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder="e-mail"></input>
                 <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder="password"></input>
-                <button isloading={isLoading.toString()} type="submit">Entrar</button>
+                <button type="submit">
+                    {isLoading ? <Loader type="ThreeDots" color="#FFFFFF" timeout={3000} /> : 'Entrar'}
+                </button>
                 <Link to='/signup'><SignUpLink>Não tem uma conta? Cadastre-se!</SignUpLink></Link>
             </Form>
         </LogInBox>
@@ -84,6 +92,9 @@ const Form = styled.form`
         line-height: 25px;
     }
     button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 45px;
         border-radius: 5px;
