@@ -9,9 +9,16 @@ export default function Habits() {
     const history = useHistory();
 
     useEffect(() => {if(!user) history.push('/')},[user]);
-    //useEffect(() => console.log(user), []);
 
     return(
-        <h1>Hábitos</h1>
+        <HabitsBox>
+            
+        </HabitsBox>
     )
 }
+
+const HabitsBox = styled.div`
+    width: 100%;
+    height: calc(100vh - 140px);
+    background: #F0F0F0;
+`;

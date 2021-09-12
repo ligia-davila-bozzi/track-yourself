@@ -1,21 +1,18 @@
 import styled from 'styled-components';
-import { useContext, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { FiLogOut } from "react-icons/fi";
 
 import UserContext from '../contexts/UserContext';
 
 export default function Habits() {
     const { user, setUser } = useContext(UserContext);
-    const history = useHistory();
-
-    useEffect(() => {if(!user) history.push('/')},[user]);
 
     return(
         <HeaderBox>
             <Title>TrackIt</Title>
             <UserArea>
-                <img src={user.image}></img>
+                {user && <img src={user.image}></img>}
                 <StyledLink to="/" onClick={()=>{localStorage.clear();setUser(null)}}><FiLogOut /></StyledLink>
             </UserArea>
         </HeaderBox>
