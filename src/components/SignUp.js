@@ -3,6 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Loader from "react-loader-spinner";
+import logo from '../imgs/logo.png';
 
 import UserContext from '../contexts/UserContext';
 
@@ -44,12 +45,12 @@ export default function SignUp() {
 
     return(
         <LogInBox>
-            <Banner></Banner>
+            <Banner src={logo}></Banner>
             <Form onSubmit={signup}>
-                <input onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder="e-mail"></input>
-                <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder="password"></input>
-                <input onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder="nome"></input>
-                <input onChange={(e) => setImage(e.target.value)} value={image} type="text" placeholder="foto"></input>
+                <input disabled={isLoading} onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder="e-mail"></input>
+                <input disabled={isLoading} onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder="password"></input>
+                <input disabled={isLoading} onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder="nome"></input>
+                <input disabled={isLoading} onChange={(e) => setImage(e.target.value)} value={image} type="text" placeholder="foto"></input>
                 <button type="submit">
                     {isLoading ? <Loader type="ThreeDots" color="#FFFFFF" timeout={3000} /> : 'Cadastrar'}
                 </button>
@@ -66,10 +67,9 @@ const LogInBox = styled.div`
     align-items: center;
 `;
 
-const Banner = styled.div`
-    height: 150px;
+const Banner = styled.img`
+    height: 178px;
     width: 180px;
-    background: lightblue;
     margin: 68px 0 10px 0;
 `;
 

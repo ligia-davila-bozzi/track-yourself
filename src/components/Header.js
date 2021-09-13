@@ -12,7 +12,7 @@ export default function Habits() {
         <HeaderBox>
             <Title>TrackIt</Title>
             <UserArea>
-                {user && <img src={user.image}></img>}
+                {user && <img alt="Profile" src={user.image}></img>}
                 <StyledLink to="/" onClick={()=>{localStorage.clear();setUser(null)}}><FiLogOut /></StyledLink>
             </UserArea>
         </HeaderBox>

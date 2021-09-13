@@ -1,11 +1,7 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import UserContext from '../contexts/UserContext';
-
 export default function Habits() {
-    const { user, setUser } = useContext(UserContext);
 
     return(
         <FooterBox>
@@ -22,7 +18,7 @@ const FooterBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 36px 0 36px;
+    padding: 0 30px 0 30px;
     background: #FFFFFF;
     position: fixed;
     bottom: 0px;
