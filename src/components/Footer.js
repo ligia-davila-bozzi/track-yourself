@@ -1,12 +1,31 @@
 import styled from 'styled-components';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
-export default function Habits() {
+import HabitsContext from '../contexts/HabitsContext';
+
+export default function Footer() {
+    const { completedHabitsPercentage } = useContext(HabitsContext);
 
     return(
         <FooterBox>
             <StyledLink to="/habits">Hábitos</StyledLink>
-            <StyledLinkCircle to="/today">Hoje</StyledLinkCircle>
+            <StyledLinkCircle to="/today">
+                <CircularProgressbar
+                    value={completedHabitsPercentage}
+                    text={`Hoje`}
+                    background
+                    backgroundPadding={6}
+                    styles={buildStyles({
+                        backgroundColor: "#3e98c7",
+                        textColor: "#fff",
+                        pathColor: "#fff",
+                        trailColor: "transparent"
+                    })}
+                />
+            </StyledLinkCircle>
             <StyledLink to="/history">Histórico</StyledLink>
         </FooterBox>
     )
@@ -40,13 +59,11 @@ const StyledLinkCircle = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #52B6FF;
     font-family: Lexend Deca;
     font-size: 18px;
     text-decoration: none;
     line-height: 22px;
     text-align: center;
-    color: #FFFFFF;
     border-radius: 45.5px;
     position: fixed;
     bottom: 10px;

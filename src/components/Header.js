@@ -5,7 +5,7 @@ import { FiLogOut } from "react-icons/fi";
 
 import UserContext from '../contexts/UserContext';
 
-export default function Habits() {
+export default function Header() {
     const { user, setUser } = useContext(UserContext);
 
     return(

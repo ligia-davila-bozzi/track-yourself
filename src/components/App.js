@@ -16,10 +16,11 @@ import History from './History';
 export default function App() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
     const [habits, setHabits] = useState([]);
+    const [completedHabitsPercentage, setCompletedHabitsPercentage] = useState(0);
 
     return (
         <UserContext.Provider value={{ user, setUser }}>
-        <HabitsContext.Provider value={{ habits, setHabits }}>
+        <HabitsContext.Provider value={{ habits, setHabits, completedHabitsPercentage, setCompletedHabitsPercentage }}>
             <BrowserRouter>
                 <Body>
                     <Switch><Route path='/' component={LogIn} exact/></Switch>

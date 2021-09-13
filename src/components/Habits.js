@@ -27,11 +27,12 @@ export default function Habits() {
         { name:"S", isSelected: false }
     ]);
 
+    // eslint-disable-next-line
     useEffect(() => {if(!user) history.push('/')},[user]);
     useEffect(() => {
         const config = { headers: { "Authorization" : `Bearer ${user.token}` } };
         const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config);
-        request.then(res => { setHabits(res.data) });
+        request.then(res => { setHabits(res.data) });// eslint-disable-next-line
     }, []);
 
     function addOrRemoveDayOfNewHabit(selectedDay){

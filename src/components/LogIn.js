@@ -14,6 +14,7 @@ export default function LogIn() {
     const history = useHistory();
     const [isLoading, setIsLoading] = useState(false);
 
+    // eslint-disable-next-line
     useEffect(() => {if(user) history.push('/habits')},[user]);
 
     function login(e) {
