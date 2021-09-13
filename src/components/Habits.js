@@ -31,7 +31,7 @@ export default function Habits() {
     useEffect(() => {
         const config = { headers: { "Authorization" : `Bearer ${user.token}` } };
         const request = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', config);
-        request.then(res => { setHabits(res.data); console.log(res.data) });
+        request.then(res => { setHabits(res.data) });
     }, []);
 
     function addOrRemoveDayOfNewHabit(selectedDay){

@@ -25,7 +25,6 @@ export default function SignUp() {
         if(isEmailValid && password && name && isImageValid) {
             setIsLoading(true);
             const body = { email, password, name, image };
-            console.log(body);
             const request = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', body);
             request.then((res) => {
                 setIsLoading(false);
@@ -34,7 +33,6 @@ export default function SignUp() {
             });
             request.catch((error) => {
                 setIsLoading(false);
-                console.log(error.response.status);
                 alert('Algo deu errado, por favor recarregue a página e tente novamente!');
             })
         } else if(!isEmailValid) { alert('Por favor, insira um e-mail válido!') }
