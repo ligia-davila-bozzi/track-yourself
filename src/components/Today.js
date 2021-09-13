@@ -26,7 +26,7 @@ export default function Today() {
     useEffect(() => {
         let numberOfCompletedHabits = 0;
         todayHabits.forEach(habit => {if(habit.done) numberOfCompletedHabits += 1})
-        setCompletedHabitsPercentage(((numberOfCompletedHabits / todayHabits.length) * 100).toFixed(.2));
+        setCompletedHabitsPercentage(((numberOfCompletedHabits / todayHabits.length) * 100).toFixed(.2)); // eslint-disable-next-line
     }, [todayHabits]);
     useEffect(() => {
         let todayInText = '';
@@ -57,7 +57,7 @@ export default function Today() {
         <TodayBox>
             <TitleBox>
                 <Title>{todayDate}</Title>
-                {completedHabitsPercentage === 0 && <SubTitle isgreen={false}>Nenhum hábito concluído ainda</SubTitle>}
+                {completedHabitsPercentage == 0 && <SubTitle isgreen={false}>Nenhum hábito concluído ainda</SubTitle>}
                 {completedHabitsPercentage > 0 && <SubTitle isgreen={completedHabitsPercentage >= 60}>{completedHabitsPercentage}% dos hábitos concluídos</SubTitle>}
             </TitleBox>
             <ListOfHabits>
